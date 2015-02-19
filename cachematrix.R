@@ -2,13 +2,19 @@
 ## then gets result from cache
 
 ## create cache and set matrix to do inverse
+## difference to example: change set function - if we assign the same matrix
+## as last used then we not clear cached inverse of matrix
 
 makeCacheMatrix <- function(x = matrix()) {
     invM <- NULL
     usedM <- NULL
+    
     set <- function(y){
       x <<- y
-      invM <<- NULL
+      if(!isTRUE(all.equal(y,getlastused()))){
+        invM <<- NULL
+      }
+      
     }
     get <- function() x
     setinverse <- function(invmatrix, used){
